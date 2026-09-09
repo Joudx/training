@@ -406,6 +406,36 @@ abstract class AppLocalizations {
   String get featureInProgressTitle;
   String get featureInProgressBody;
   String get ok;
+  String get loginTitle;
+  String get loginSubtitle;
+  String get registerTitle;
+  String get registerSubtitle;
+  String get email;
+  String get password;
+  String get loginAction;
+  String get registerAction;
+  String get name;
+  String get phoneOptional;
+  String get confirmPassword;
+  String get loginFailed;
+  String get emailRequired;
+  String get emailInvalid;
+  String get passwordRequired;
+  String get passwordMinLength;
+  String get nameRequired;
+  String get passwordsDoNotMatch;
+  String get emailAlreadyUsed;
+  String get logout;
+  String get logoutConfirm;
+  String get cancel;
+  String get loginRequired;
+  String get demoAccounts;
+  String get demoHint;
+  String get createAccount;
+  String get haveAccount;
+  String get welcomeUser;
+  String get loggedInAs;
+  String get partThreeSoon;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

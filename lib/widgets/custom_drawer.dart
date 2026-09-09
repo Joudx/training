@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import '../constants/app_constants.dart';
+import '../data/auth_session.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/app_theme.dart';
 import '../utils/app_launchers.dart';
+import '../utils/auth_guards.dart';
 
 class CustomDrawer extends StatelessWidget {
   final int currentIndex;
@@ -17,6 +19,8 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final user = AuthSession.instance.user;
+    final loggedIn = AuthSession.instance.isLoggedIn;
     final headerHeight =
         MediaQuery.sizeOf(context).height < 640 ? 168.0 : 208.0;
 
@@ -65,7 +69,11 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    l10n.weworkforgoodness,
+                    user != null
+                        ? '${l10n.loggedInAs} ${user.name}'
+                        : l10n.weworkforgoodness,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(color: Colors.white70, fontSize: 13),
                   ),
                 ],
@@ -89,15 +97,16 @@ class CustomDrawer extends StatelessWidget {
               Navigator.pushNamed(context, AppRoutes.gallery);
             },
           ),
-          _DrawerTile(
-            icon: Icons.volunteer_activism_outlined,
-            label: l10n.dontations,
-            selected: currentIndex == 1,
-            onTap: () {
-              Navigator.pop(context);
-              onIndexChanged(1);
-            },
-          ),
+          if (loggedIn)
+            _DrawerTile(
+              icon: Icons.volunteer_activism_outlined,
+              label: l10n.dontations,
+              selected: currentIndex == 1,
+              onTap: () {
+                Navigator.pop(context);
+                onIndexChanged(1);
+              },
+            ),
           _DrawerTile(
             icon: Icons.assignment_outlined,
             label: l10n.programs,
@@ -115,14 +124,15 @@ class CustomDrawer extends StatelessWidget {
               Navigator.pushNamed(context, AppRoutes.campaigns);
             },
           ),
-          _DrawerTile(
-            icon: Icons.history,
-            label: l10n.mydonationrecord,
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, AppRoutes.donationHistory);
-            },
-          ),
+          if (loggedIn)
+            _DrawerTile(
+              icon: Icons.history,
+              label: l10n.mydonationrecord,
+              onTap: () {
+                Navigator.pop(context);
+                openDonationHistory(context);
+              },
+            ),
           const Divider(),
           _DrawerTile(
             icon: Icons.info_outline,
@@ -157,6 +167,36 @@ class CustomDrawer extends StatelessWidget {
               launchAppUri(context, AppOrg.website);
             },
           ),
+          if (loggedIn) ...[
+            const Divider(),
+            _DrawerTile(
+              icon: Icons.logout,
+              label: l10n.logout,
+              onTap: () async {
+                Navigator.pop(context);
+                final confirmed = await showDialog<bool>(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: Text(l10n.logout),
+                    content: Text(l10n.logoutConfirm),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(ctx, false),
+                        child: Text(l10n.cancel),
+                      ),
+                      FilledButton(
+                        onPressed: () => Navigator.pop(ctx, true),
+                        child: Text(l10n.logout),
+                      ),
+                    ],
+                  ),
+                );
+                if (confirmed == true) {
+                  await AuthSession.instance.logout();
+                }
+              },
+            ),
+          ],
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../main.dart';
 import '../navigation/app_tabs.dart';
+import '../data/auth_session.dart';
 import '../widgets/custom_drawer.dart';
 import 'about_screen.dart';
 import 'donation_screen.dart';
@@ -33,6 +34,9 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _selectTab(int index) {
+    if (index == 1 && !AuthSession.instance.isLoggedIn) {
+      return;
+    }
     appTabIndex.value = index;
   }
 

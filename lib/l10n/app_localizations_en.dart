@@ -255,4 +255,98 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ok => 'OK';
+
+  @override
+  String get loginTitle => 'Sign in';
+
+  @override
+  String get loginSubtitle =>
+      'Sign in to donate and view your giving record with Ekram';
+
+  @override
+  String get registerTitle => 'Create account';
+
+  @override
+  String get registerSubtitle =>
+      'Create a donor account to access donations and your record';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get loginAction => 'Sign in';
+
+  @override
+  String get registerAction => 'Create account';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get phoneOptional => 'Phone (optional)';
+
+  @override
+  String get confirmPassword => 'Confirm password';
+
+  @override
+  String get loginFailed => 'Incorrect email or password';
+
+  @override
+  String get emailRequired => 'Enter your email';
+
+  @override
+  String get emailInvalid => 'Enter a valid email';
+
+  @override
+  String get passwordRequired => 'Enter your password';
+
+  @override
+  String get passwordMinLength => 'Password must be at least 6 characters';
+
+  @override
+  String get nameRequired => 'Enter your name';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get emailAlreadyUsed => 'This email is already registered';
+
+  @override
+  String get logout => 'Sign out';
+
+  @override
+  String get logoutConfirm => 'Do you want to sign out of your account?';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get loginRequired => 'Please sign in to access this page';
+
+  @override
+  String get demoAccounts => 'Demo accounts';
+
+  @override
+  String get demoHint =>
+      'For training, sign in with one of these accounts. Password for all accounts:';
+
+  @override
+  String get createAccount => 'No account? Create one';
+
+  @override
+  String get haveAccount => 'Already have an account? Sign in';
+
+  @override
+  String get welcomeUser => 'Welcome,';
+
+  @override
+  String get loggedInAs => 'Hello';
+
+  @override
+  String get partThreeSoon =>
+      'In-app donation forms and donation history will be enabled in the next training phase.';
 }

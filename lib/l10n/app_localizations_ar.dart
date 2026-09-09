@@ -251,4 +251,98 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get ok => 'حسناً';
+
+  @override
+  String get loginTitle => 'تسجيل الدخول';
+
+  @override
+  String get loginSubtitle =>
+      'ادخل لحسابك لمتابعة التبرع وسجل عطائك مع جمعية إكرام';
+
+  @override
+  String get registerTitle => 'إنشاء حساب';
+
+  @override
+  String get registerSubtitle =>
+      'أنشئ حساب متبرع جديد للوصول إلى التبرع وسجل التبرعات';
+
+  @override
+  String get email => 'البريد الإلكتروني';
+
+  @override
+  String get password => 'كلمة المرور';
+
+  @override
+  String get loginAction => 'دخول';
+
+  @override
+  String get registerAction => 'إنشاء الحساب';
+
+  @override
+  String get name => 'الاسم';
+
+  @override
+  String get phoneOptional => 'رقم الجوال (اختياري)';
+
+  @override
+  String get confirmPassword => 'تأكيد كلمة المرور';
+
+  @override
+  String get loginFailed => 'بيانات الدخول غير صحيحة';
+
+  @override
+  String get emailRequired => 'أدخل البريد الإلكتروني';
+
+  @override
+  String get emailInvalid => 'البريد الإلكتروني غير صالح';
+
+  @override
+  String get passwordRequired => 'أدخل كلمة المرور';
+
+  @override
+  String get passwordMinLength => 'كلمة المرور يجب ألا تقل عن 6 أحرف';
+
+  @override
+  String get nameRequired => 'أدخل الاسم';
+
+  @override
+  String get passwordsDoNotMatch => 'كلمتا المرور غير متطابقتين';
+
+  @override
+  String get emailAlreadyUsed => 'هذا البريد مسجّل مسبقاً';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get logoutConfirm => 'هل تريد تسجيل الخروج من حسابك؟';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get loginRequired => 'يلزم تسجيل الدخول للوصول إلى هذه الصفحة';
+
+  @override
+  String get demoAccounts => 'حسابات تجريبية';
+
+  @override
+  String get demoHint =>
+      'للتدريب يمكنك الدخول بأحد الحسابات التالية. كلمة المرور لجميع الحسابات:';
+
+  @override
+  String get createAccount => 'ليس لديك حساب؟ إنشاء حساب';
+
+  @override
+  String get haveAccount => 'لديك حساب؟ تسجيل الدخول';
+
+  @override
+  String get welcomeUser => 'مرحباً،';
+
+  @override
+  String get loggedInAs => 'مرحباً';
+
+  @override
+  String get partThreeSoon =>
+      'نموذج التبرع الإلكتروني وسجل التبرعات داخل التطبيق سيُفعَّل في الجزء التالي من المشروع التدريبي.';
 }

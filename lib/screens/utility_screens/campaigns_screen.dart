@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../constants/app_constants.dart';
 import '../../l10n/app_localizations.dart';
-import '../../navigation/app_tabs.dart';
 import '../../theme/app_layout.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/auth_guards.dart';
 
 class CampaignsScreen extends StatelessWidget {
   const CampaignsScreen({super.key});
@@ -100,10 +100,7 @@ class CampaignsScreen extends StatelessWidget {
                             Text('${(c.progress * 100).round()}%'),
                             const Spacer(),
                             FilledButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                appTabIndex.value = 1;
-                              },
+                              onPressed: () => goToDonate(context),
                               style: FilledButton.styleFrom(
                                 backgroundColor: c.color,
                               ),

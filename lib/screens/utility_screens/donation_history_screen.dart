@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../data/auth_session.dart';
 import '../../l10n/app_localizations.dart';
 import '../../theme/app_layout.dart';
 import '../../theme/app_theme.dart';
@@ -35,14 +36,17 @@ class DonationHistoryScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  l10n.mydonationrecord,
+                  AuthSession.instance.user != null
+                      ? '${l10n.welcomeUser} ${AuthSession.instance.user!.name}'
+                      : l10n.mydonationrecord,
+                  textAlign: TextAlign.center,
                   style: theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w800,
                   ),
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  l10n.partTwoSoon,
+                  l10n.partThreeSoon,
                   textAlign: TextAlign.center,
                   style: theme.textTheme.bodyLarge?.copyWith(
                     color: theme.colorScheme.onSurfaceVariant,

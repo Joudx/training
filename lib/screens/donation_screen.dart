@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants/app_constants.dart';
+import '../data/auth_session.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/app_layout.dart';
 import '../theme/app_theme.dart';
@@ -55,6 +56,16 @@ class DonationScreen extends StatelessWidget {
                             color: Colors.white.withValues(alpha: 0.9),
                           ),
                         ),
+                        if (AuthSession.instance.user != null) ...[
+                          const SizedBox(height: 8),
+                          Text(
+                            '${l10n.welcomeUser} ${AuthSession.instance.user!.name}',
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                   ),
@@ -77,7 +88,7 @@ class DonationScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    l10n.partTwoSoon,
+                    l10n.partThreeSoon,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       height: 1.6,
                       color: theme.colorScheme.onSurfaceVariant,

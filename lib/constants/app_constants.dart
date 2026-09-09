@@ -31,6 +31,8 @@ class AppRoutes {
   static const String gallery = '/gallery';
   static const String campaigns = '/campaigns';
   static const String donationHistory = '/donationHistory';
+  static const String login = '/login';
+  static const String register = '/register';
 }
 
 class AppImages {

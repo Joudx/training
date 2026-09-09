@@ -5,6 +5,7 @@ import '../models/charity_service.dart';
 import '../navigation/app_tabs.dart';
 import '../theme/app_layout.dart';
 import '../theme/app_theme.dart';
+import '../utils/auth_guards.dart';
 import '../widgets/service_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -145,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 SizedBox(height: isNarrow ? 10 : 16),
                                 FilledButton(
-                                  onPressed: () => appTabIndex.value = 1,
+                                  onPressed: () => goToDonate(context),
                                   style: FilledButton.styleFrom(
                                     backgroundColor: AppTheme.secondary,
                                     foregroundColor: Colors.white,
@@ -283,7 +284,7 @@ class HomeScreen extends StatelessWidget {
                         color: AppTheme.iftar,
                         image: AppImages.breakfast,
                         width: AppLayout.campaignWidth(width),
-                        onDonate: () => appTabIndex.value = 1,
+                        onDonate: () => goToDonate(context),
                       ),
                       _CampaignCard(
                         title: l10n.waterdistribution,
@@ -292,7 +293,7 @@ class HomeScreen extends StatelessWidget {
                         color: AppTheme.water,
                         image: AppImages.water,
                         width: AppLayout.campaignWidth(width),
-                        onDonate: () => appTabIndex.value = 1,
+                        onDonate: () => goToDonate(context),
                       ),
                       _CampaignCard(
                         title: l10n.foodbaskets,
@@ -301,7 +302,7 @@ class HomeScreen extends StatelessWidget {
                         color: AppTheme.baskets,
                         image: AppImages.foodBaskets,
                         width: AppLayout.campaignWidth(width),
-                        onDonate: () => appTabIndex.value = 1,
+                        onDonate: () => goToDonate(context),
                       ),
                     ],
                   ),
