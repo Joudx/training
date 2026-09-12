@@ -105,5 +105,7 @@
   "haveAccount": "Already have an account? Sign in",
   "welcomeUser": "Welcome,",
   "loggedInAs": "Hello",
-  "partThreeSoon": "In-app donation forms and donation history will be enabled in the next training phase."
+  "partThreeSoon": "In-app donation forms and donation history will be enabled in the next training phase.",
+  "loginDbError": "Could not open the local database. Run the app on an emulator or Android device (not Chrome), then run flutter pub get and restart.",
+  "tapDemoAccount": "Tap an account to fill the email and password"
 }

@@ -36,7 +36,7 @@ class UserRepository {
   Future<AppUser?> authenticate(String email, String password) async {
     final user = await findByEmail(email);
     if (user == null) return null;
-    if (user.password != password) return null;
+    if (user.password != password.trim()) return null;
     return user;
   }
 

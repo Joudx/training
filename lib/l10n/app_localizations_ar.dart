@@ -345,4 +345,12 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get partThreeSoon =>
       'نموذج التبرع الإلكتروني وسجل التبرعات داخل التطبيق سيُفعَّل في الجزء التالي من المشروع التدريبي.';
+
+  @override
+  String get loginDbError =>
+      'تعذر فتح قاعدة البيانات المحلية. شغّل التطبيق على المحاكي أو جهاز أندرويد (مو Chrome)، ثم نفّذ flutter pub get وأعد التشغيل.';
+
+  @override
+  String get tapDemoAccount =>
+      'اضغط الحساب لتعبئة الإيميل وكلمة المرور تلقائياً';
 }

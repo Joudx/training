@@ -349,4 +349,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get partThreeSoon =>
       'In-app donation forms and donation history will be enabled in the next training phase.';
+
+  @override
+  String get loginDbError =>
+      'Could not open the local database. Run the app on an emulator or Android device (not Chrome), then run flutter pub get and restart.';
+
+  @override
+  String get tapDemoAccount =>
+      'Tap an account to fill the email and password';
 }

@@ -25,24 +25,19 @@ class AppDatabase {
 
   Future<Database> _open() async {
     final path = await _dbPath();
-    return openDatabase(
+    final db = await openDatabase(
       path,
       version: _version,
       onCreate: (db, version) async {
-        // Passwords are stored as plain text for training only.
-        await db.execute('''
-CREATE TABLE users (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL,
-  email TEXT NOT NULL UNIQUE,
-  phone TEXT,
-  password TEXT NOT NULL,
-  created_at TEXT NOT NULL
-)
-''');
+        await _ensureUsersTable(db);
         await _seedUsers(db);
       },
     );
+    // Seed on every open so demo accounts exist even if the DB file
+    // was copied, created empty, or created before seeding ran.
+    await _ensureUsersTable(db);
+    await _seedUsers(db);
+    return db;
   }
 
   Future<String> _dbPath() async {
@@ -53,21 +48,42 @@ CREATE TABLE users (
     return p.join(await getDatabasesPath(), _dbName);
   }
 
+  Future<void> _ensureUsersTable(Database db) async {
+    await db.execute('''
+CREATE TABLE IF NOT EXISTS users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL UNIQUE,
+  phone TEXT,
+  password TEXT NOT NULL,
+  created_at TEXT NOT NULL
+)
+''');
+  }
+
   Future<void> _seedUsers(Database db) async {
     final now = DateTime.now().toIso8601String();
-    await db.insert('users', {
-      'name': 'متبرع تجريبي',
-      'email': DemoAccounts.demoEmail,
-      'phone': '0536060603',
-      'password': DemoAccounts.password,
-      'created_at': now,
-    });
-    await db.insert('users', {
-      'name': 'متبرع إكرام',
-      'email': DemoAccounts.donorEmail,
-      'phone': '0555299319',
-      'password': DemoAccounts.password,
-      'created_at': now,
-    });
+    await db.insert(
+      'users',
+      {
+        'name': 'متبرع تجريبي',
+        'email': DemoAccounts.demoEmail,
+        'phone': '0536060603',
+        'password': DemoAccounts.password,
+        'created_at': now,
+      },
+      conflictAlgorithm: ConflictAlgorithm.ignore,
+    );
+    await db.insert(
+      'users',
+      {
+        'name': 'متبرع إكرام',
+        'email': DemoAccounts.donorEmail,
+        'phone': '0555299319',
+        'password': DemoAccounts.password,
+        'created_at': now,
+      },
+      conflictAlgorithm: ConflictAlgorithm.ignore,
+    );
   }
 }

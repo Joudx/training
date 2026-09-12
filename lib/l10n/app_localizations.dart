@@ -436,6 +436,8 @@ abstract class AppLocalizations {
   String get welcomeUser;
   String get loggedInAs;
   String get partThreeSoon;
+  String get loginDbError;
+  String get tapDemoAccount;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

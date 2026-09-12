@@ -30,13 +30,20 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  void _fillDemo(String email) {
+    setState(() {
+      _emailController.text = email;
+      _passwordController.text = DemoAccounts.password;
+    });
+  }
+
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _busy = true);
     final l10n = AppLocalizations.of(context)!;
     try {
       final user = await UserRepository.instance.authenticate(
-        _emailController.text,
+        _emailController.text.trim(),
         _passwordController.text,
       );
       if (!mounted) return;
@@ -47,10 +54,11 @@ class _LoginScreenState extends State<LoginScreen> {
         return;
       }
       await AuthSession.instance.login(user);
-    } catch (_) {
+    } catch (error, stack) {
+      debugPrint('Login database error: $error\n$stack');
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.loginFailed)),
+        SnackBar(content: Text(l10n.loginDbError)),
       );
     } finally {
       if (mounted) setState(() => _busy = false);
@@ -203,12 +211,27 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      SelectableText(
-                        '${DemoAccounts.demoEmail}\n${DemoAccounts.donorEmail}\n${l10n.password}: ${DemoAccounts.password}',
+                      Text(
+                        '${l10n.password}: ${DemoAccounts.password}',
                         style: theme.textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.w700,
                         ),
-                        textDirection: TextDirection.ltr,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        l10n.tapDemoAccount,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onPrimaryContainer,
+                        ),
+                      ),
+                      _DemoAccountButton(
+                        email: DemoAccounts.demoEmail,
+                        onTap: () => _fillDemo(DemoAccounts.demoEmail),
+                      ),
+                      const SizedBox(height: 8),
+                      _DemoAccountButton(
+                        email: DemoAccounts.donorEmail,
+                        onTap: () => _fillDemo(DemoAccounts.donorEmail),
                       ),
                     ],
                   ),
@@ -217,6 +240,24 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _DemoAccountButton extends StatelessWidget {
+  final String email;
+  final VoidCallback onTap;
+
+  const _DemoAccountButton({required this.email, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: OutlinedButton(
+        onPressed: onTap,
+        child: Text(email, textDirection: TextDirection.ltr),
       ),
     );
   }
